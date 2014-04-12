@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+    <definition name="baseLayout" template="/pages/baseLayout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/pages/header.jsp" />
+        <put-attribute name="body" value="" />
+        <put-attribute name="footer" value="/pages/footer.jsp" />
+    </definition>
+    <definition name="/home.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/index.jsp" />
+    </definition>
+    <definition name="/customer.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/register.jsp" />
+    </definition>
+    <definition name="/signIn.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/signin.jsp" />
+    </definition>
+    <definition name="/orderDetails.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/newOrder.jsp" />
+    </definition>
+    <definition name="/customerOrders.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/customerOrders.jsp" />
+    </definition>
+</tiles-definitions>

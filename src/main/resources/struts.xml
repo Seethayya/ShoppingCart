@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.custom.i18n.resources" value="messages"/>
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+
+    <package name="shoppingCart" namespace="/" extends="struts-default">
+
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
+        </result-types>
+
+        <action name="index" class="com.seethayya.shoppingcart.webapp.action.CustomerAction">
+            <result name="success" type="tiles">/home.tiles</result>
+        </action>
+
+        <action name="signUp" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="signUp">
+            <result name="success" type="tiles">/customer.tiles</result>
+            <result name="error" type="tiles">/customer.tiles</result>
+        </action>
+
+        <action name="register" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="registerCustomer">
+            <result name="success" type="tiles">/customerOrders.tiles</result>
+            <result name="error" type="tiles">/customer.tiles</result>
+        </action>
+
+        <action name="signInPage">
+            <result type="tiles">/signIn.tiles</result>
+        </action>
+
+        <action name="signIn" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="signIn">
+            <result name="success" type="tiles">/customerOrders.tiles</result>
+            <result name="error" type="tiles">/signIn.tiles</result>
+        </action>
+
+        <action name="signOut" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="signOut">
+            <result name="success" type="tiles">/home.tiles</result>
+        </action>
+
+        <action name="newOrder" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="newOrder">
+            <result name="success" type="tiles">/orderDetails.tiles</result>
+            <result name="error" type="tiles">/orderDetails.tiles</result>
+        </action>
+        <action name="createOrder" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="createOrder">
+            <result name="success" type="tiles">/customerOrders.tiles</result>
+            <result name="error" type="tiles">/orderDetails.tiles</result>
+        </action>
+
+        <action name="findCustomerOrders" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="loadOrders">
+            <result name="success" type="tiles">/customerOrders.tiles</result>
+            <result name="error" type="tiles">/customerOrders.tiles</result>
+        </action>
+
+
+        <action name="findCustomer" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="findCustomer">
+            <result name="success">pages/index.jsp</result>
+        </action>
+
+        <action name="findAllCustomers" class="com.seethayya.shoppingcart.webapp.action.CustomerAction"
+                method="findAllCustomers">
+            <result name="success">pages/index.jsp</result>
+        </action>
+    </package>
+
+</struts>

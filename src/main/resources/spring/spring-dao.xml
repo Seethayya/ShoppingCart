@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+ http://www.springframework.org/schema/beans/spring-beans.xsd
+ http://www.springframework.org/schema/aop
+ http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+
+    <bean id="finderIntroductionAdvisor" class="com.seethayya.shoppingcart.aop.FinderIntroductionAdvisor"/>
+
+    <bean id="abstractDaoTarget" class="com.seethayya.shoppingcart.dao.impl.GenericDaoImpl" abstract="true"/>
+
+    <bean id="abstractDao" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
+        <property name="interceptorNames">
+            <list>
+                <value>finderIntroductionAdvisor</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean id="customerDao" parent="abstractDao">
+        <property name="proxyInterfaces" value="com.seethayya.shoppingcart.dao.CustomerDao"/>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg value="com.seethayya.shoppingcart.dto.Customer"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="itemDao" parent="abstractDao">
+        <property name="proxyInterfaces" value="com.seethayya.shoppingcart.dao.ItemDao"/>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg value="com.seethayya.shoppingcart.dto.Item"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="customerOrderDao" parent="abstractDao">
+        <property name="proxyInterfaces" value="com.seethayya.shoppingcart.dao.CustomerOrderDao"/>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg value="com.seethayya.shoppingcart.dto.CustomerOrder"/>
+            </bean>
+        </property>
+    </bean>
+</beans>
