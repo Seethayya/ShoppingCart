@@ -31,17 +31,24 @@ public class CustomerAction extends BaseAction {
     private String userName;
     private Customer customer;
     private CustomerService customerService;
+    private static final String ALREADY_SIGN_IN =  "alreadySignIn";
 
     private static final Logger LOGGER = Logger.getLogger(CustomerAction.class);
 
     public String execute() {
         LOGGER.debug("Started Action HOME");
+        if(getCustomerFromSession() != null) {
+            return ALREADY_SIGN_IN;
+        }
         customerService.findCustomer(userName);
         return SUCCESS;
     }
 
 
     public String signIn() {
+        if(getCustomerFromSession() != null) {
+            return ALREADY_SIGN_IN;
+        }
         if (validateCustomerLogin()) {
             return ERROR;
         }
@@ -66,10 +73,16 @@ public class CustomerAction extends BaseAction {
     }
 
     public String signUp() {
+        if(getCustomerFromSession() != null) {
+            return ALREADY_SIGN_IN;
+        }
         return SUCCESS;
     }
 
     public String registerCustomer() {
+        if(getCustomerFromSession() != null) {
+            return ALREADY_SIGN_IN;
+        }
         if (validateCustomer()) {
             return ERROR;
         }

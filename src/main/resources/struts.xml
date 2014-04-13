@@ -13,6 +13,11 @@
         <result-types>
             <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult"/>
         </result-types>
+        <global-results>
+            <result name="alreadySignIn" type="redirectAction">
+                <param name="actionName">findCustomerOrders</param>
+            </result>
+        </global-results>
 
         <action name="index" class="com.seethayya.shoppingcart.webapp.action.CustomerAction">
             <result name="success" type="tiles">/home.tiles</result>
@@ -31,7 +36,10 @@
         </action>
 
         <action name="signInPage">
-            <result type="tiles">/signIn.tiles</result>
+            <result name="success" type="tiles">/signIn.tiles</result>
+            <result name="alreadySignIn" type="redirectAction">
+                <param name="actionName">findCustomerOrders</param>
+            </result>
         </action>
 
         <action name="signIn" class="com.seethayya.shoppingcart.webapp.action.CustomerAction" method="signIn">

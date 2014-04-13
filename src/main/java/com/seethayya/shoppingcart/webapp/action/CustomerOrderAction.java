@@ -57,16 +57,6 @@ public class CustomerOrderAction extends BaseAction {
         return SUCCESS;
     }
 
-    public String signOut() {
-        getSessionMap().remove("customer");
-        return SUCCESS;
-    }
-
-    private com.seethayya.shoppingcart.dto.Customer getCustomerFromSession() {
-        return (com.seethayya.shoppingcart.dto.Customer) getSessionMap().get("customer");
-    }
-
-
     public String createOrder() {
         com.seethayya.shoppingcart.dto.Customer sessionCustomer = getCustomerFromSession();
         if (sessionCustomer == null) {

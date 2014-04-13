@@ -19,7 +19,7 @@
     Phone no : <s:textfield name="customer.phoneNo"/>                 <br/>
     Email Id : <s:textfield name="customer.emailId"/>                      <br/>
     Password : <s:password name="customer.password"/>                           <br/>
-     <s:submit />
+     <s:submit value="register"/>
      <br/>
      <div style="color:red;">
      <s:actionerror/>

@@ -5,7 +5,7 @@
 <body>
 <div style="width:960px;">
     <s:form action="createOrder" theme="simple">
-        Enter new Order details : Order Id : <s:property value="orderId"/>
+        Enter new Order details : Order Id :<span style="color:green;"> <s:property value="orderId"/> </span> <br/>
         <s:hidden name="orderId"/>
         <s:iterator value="itemList" var="item" status="stat">
             <s:property value="#item.name"/>

@@ -14,7 +14,7 @@
                     <div style="width:800px;clear:both;">
                         <div style="margin-left:0px;">
                         <input type="radio" name="orderId" value="<s:property value="%{#orderForm.orderId}"/>"/>
-                        Order Id : <s:property value="#orderForm.orderId"/>
+                        Order Id : <span style="color:green;"> <s:property value="#orderForm.orderId"/> </span>
                         Order Date : <s:property value="#orderForm.orderDate"/>
                         Total price : <s:property value="#orderForm.totalPrice"/>
                             <a href="deleteOrder?orderForm.id=<s:property value="%{#orderForm.id}"/>"

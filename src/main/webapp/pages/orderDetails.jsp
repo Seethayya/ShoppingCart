@@ -5,10 +5,9 @@
 <body>
 <div style="width:960px;">
     <s:form action="updateOrder" theme="simple">
-        Update existing Order details : Order Id : <s:property value="orderId"/>
+        Update existing Order details : Order Id :<span style="color:green;"><s:property value="orderId"/>  </span> <br/>
         <s:hidden name="orderId"/>
         <s:set var="orderDetailFormsSize" value="%{orderForm.orderDetailForms.size()}"/>
-        Size1:<s:property value="#orderDetailFormsSize"/>:
         <s:iterator value="itemList" var="item" status="stat">
             <s:set var="isItemFound" value="false"/>
             <s:set var="formIndex" value="%{#stat.count+#orderDetailFormsSize}"/>
