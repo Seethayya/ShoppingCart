@@ -16,7 +16,9 @@ public interface CustomerOrderService {
 
     List<OrderForm> findCustomerOrders(Long customerId);
 
-    void createOrder(String orderId, List<OrderDetailForm> orderFormList, Long customerId);
+    void createOrUpdateOrder(String orderId, List<OrderDetailForm> orderFormList, Long customerId);
 
     List<CustomerOrder> findOrdersByOrderId(String orderId);
+
+    void deleteOrder(Long orderId);
 }

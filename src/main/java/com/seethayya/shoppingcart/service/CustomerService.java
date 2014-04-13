@@ -14,7 +14,7 @@ public interface CustomerService {
 
     com.seethayya.shoppingcart.dto.Customer findCustomerById(Long id);
 
-    Customer saveOrUpdateCustomer(Customer customer);
+    com.seethayya.shoppingcart.dto.Customer saveOrUpdateCustomer(Customer customer);
 
     Customer findCustomer(String userName);
 

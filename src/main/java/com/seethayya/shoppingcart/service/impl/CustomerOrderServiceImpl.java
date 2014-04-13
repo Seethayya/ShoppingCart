@@ -3,6 +3,7 @@ package com.seethayya.shoppingcart.service.impl;
 import com.seethayya.shoppingcart.dao.CustomerDao;
 import com.seethayya.shoppingcart.dao.CustomerOrderDao;
 import com.seethayya.shoppingcart.dao.ItemDao;
+import com.seethayya.shoppingcart.dao.OrderDetailsDao;
 import com.seethayya.shoppingcart.dto.Customer;
 import com.seethayya.shoppingcart.dto.CustomerOrder;
 import com.seethayya.shoppingcart.dto.OrderDetails;
@@ -18,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
  * Created by IntelliJ IDEA.
@@ -31,6 +33,8 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     private CustomerOrderDao customerOrderDao;
     private ItemDao itemDao;
     private CustomerDao customerDao;
+    private OrderDetailsDao orderDetailsDao;
+    private static final org.apache.log4j.Logger LOGGER = org.apache.log4j.Logger.getLogger(CustomerOrderServiceImpl.class);
 
     public List<OrderForm> findCustomerOrders(Long customerId) {
         List<OrderForm> orderForms = new ArrayList<OrderForm>();
@@ -46,7 +50,7 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     }
 
     @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)
-    public void createOrder(String orderId, List<OrderDetailForm> orderFormList, Long customerId) {
+    public void createOrUpdateOrder(String orderId, List<OrderDetailForm> orderFormList, Long customerId) {
 
         Customer customer = customerDao.read(customerId);
         CustomerOrder customerOrder = null;
@@ -64,24 +68,39 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
         }
         Set<OrderDetails> orderDetailsSet = new LinkedHashSet<OrderDetails>();
         BigDecimal totalPrice = BigDecimal.ZERO;
-        for (OrderDetailForm orderForm : orderFormList) {
-            OrderDetails orderDetails = new OrderDetails();
-            orderDetails.setItem(itemDao.read(orderForm.getItemId()));
-            orderDetails.setQuantity(orderForm.getQuantity());
-            orderDetails.setCustomerOrder(customerOrder);
-            orderDetailsSet.add(orderDetails);
+        for (OrderDetailForm orderDetailForm : orderFormList) {
+            OrderDetails orderDetails = null;
+            if (orderDetailForm.getId() != null && orderDetailForm.getId() > 0) {
+                orderDetails = orderDetailsDao.read(orderDetailForm.getId());
+            } else {
+                orderDetails = new OrderDetails();
+                orderDetailsSet.add(orderDetails);
+                orderDetails.setCustomerOrder(customerOrder);
+            }
+            orderDetails.setItem(itemDao.read(orderDetailForm.getItemId()));
+            orderDetails.setQuantity(orderDetailForm.getQuantity());
             totalPrice = totalPrice.add(orderDetails.getItem().getPrice().multiply(BigDecimal.valueOf(orderDetails.getQuantity())));
         }
         customerOrder.setTotalPrice(totalPrice);
         customerOrder.getOrderDetailses().addAll(orderDetailsSet);
         customerOrder.setCustomer(customer);
         if (customerOrder.getId() == null) {
+            LOGGER.debug("---------Update order having orderId:" + orderId);
             customerOrderDao.create(customerOrder);
         } else {
+            LOGGER.debug("---------Create new order having orderId:" + orderId);
             customerOrderDao.update(customerOrder);
         }
     }
 
+    @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)
+    public void deleteOrder(Long orderId) {
+        LOGGER.debug("---Deleting order with id:"+orderId);
+        CustomerOrder customerOrder = customerOrderDao.read(orderId);
+        if(customerOrder != null) {
+            customerOrderDao.delete(customerOrder);
+        }
+    }
     public List<CustomerOrder> findOrdersByOrderId(String orderId) {
         return customerOrderDao.findOrderByOrderId(orderId);
     }
@@ -99,5 +118,10 @@ public class CustomerOrderServiceImpl implements CustomerOrderService {
     @Resource
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    @Resource
+    public void setOrderDetailsDao(OrderDetailsDao orderDetailsDao) {
+        this.orderDetailsDao = orderDetailsDao;
     }
 }

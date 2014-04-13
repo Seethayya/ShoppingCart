@@ -5,7 +5,7 @@
 <body>
 <div style="width:960px;">
     <s:form action="createOrder" theme="simple">
-        Enter new New Order details : Order Id : <s:property value="orderId"/>
+        Enter new Order details : Order Id : <s:property value="orderId"/>
         <s:hidden name="orderId"/>
         <s:iterator value="itemList" var="item" status="stat">
             <s:property value="#item.name"/>
@@ -13,7 +13,8 @@
             <s:hidden name="orderDetailForms[%{#stat.index}].itemId" value="%{#item.id}"/>
             <s:textfield name="orderDetailForms[%{#stat.index}].quantity"/> <br/>
         </s:iterator>
-        <s:submit/>
+        <s:submit value="Save Order"/>
+         <a href="findCustomerOrders.action" style="text-decoration:none;">Cancel</a>
     </s:form>
 </div>
 </body>

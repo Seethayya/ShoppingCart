@@ -6,10 +6,9 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Manjunatha
+ * User: Seethayya
  * Date: 4/10/14
  * Time: 1:41 PM
- * To change this template use File | Settings | File Templates.
  */
 public interface GenericDao <T, PK extends Serializable> {
 

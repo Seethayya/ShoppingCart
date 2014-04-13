@@ -24,6 +24,10 @@ public abstract class BaseAction extends ActionSupport implements SessionAware {
         this.sessionMap = sessionMap;
     }
 
+    private com.seethayya.shoppingcart.dto.Customer getCustomerFromSession() {
+        return (com.seethayya.shoppingcart.dto.Customer) getSessionMap().get("customer");
+    }
+
     @Override
     public void setSession(Map<String, Object> map) {
         sessionMap = (SessionMap<String, Object>) map;

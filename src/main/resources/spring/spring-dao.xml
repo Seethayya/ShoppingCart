@@ -47,4 +47,12 @@
             </bean>
         </property>
     </bean>
+    <bean id="orderDetailsDao" parent="abstractDao">
+        <property name="proxyInterfaces" value="com.seethayya.shoppingcart.dao.OrderDetailsDao"/>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg value="com.seethayya.shoppingcart.dto.OrderDetails"/>
+            </bean>
+        </property>
+    </bean>
 </beans>

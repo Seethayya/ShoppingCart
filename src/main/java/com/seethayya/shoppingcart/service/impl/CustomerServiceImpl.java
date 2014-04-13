@@ -13,10 +13,9 @@ import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Manjunatha
+ * User: Seethayya
  * Date: 4/9/14
  * Time: 1:41 PM
- * To change this template use File | Settings | File Templates.
  */
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -28,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)
-    public Customer saveOrUpdateCustomer(Customer customer) {
+    public com.seethayya.shoppingcart.dto.Customer saveOrUpdateCustomer(Customer customer) {
         com.seethayya.shoppingcart.dto.Customer customerDto = null;
         if (customer.getId() != null) {
             customerDto = customerDao.read(customer.getId());
@@ -43,7 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         } else {
             customerDao.update(customerDto);
         }
-        return customer;
+        return customerDto;
     }
 
     @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)

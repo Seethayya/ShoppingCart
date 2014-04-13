@@ -30,4 +30,8 @@
         <put-attribute name="title" value="Customer Registration Form" />
         <put-attribute name="body" value="/pages/customerOrders.jsp" />
     </definition>
+    <definition name="/existingOrderDetails.tiles" extends="baseLayout">
+        <put-attribute name="title" value="Customer Registration Form" />
+        <put-attribute name="body" value="/pages/orderDetails.jsp" />
+    </definition>
 </tiles-definitions>

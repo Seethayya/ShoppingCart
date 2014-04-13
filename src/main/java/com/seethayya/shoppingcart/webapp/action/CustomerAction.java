@@ -2,7 +2,9 @@ package com.seethayya.shoppingcart.webapp.action;
 
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+import com.seethayya.shoppingcart.dto.CustomerOrder;
 import com.seethayya.shoppingcart.dto.Item;
+import com.seethayya.shoppingcart.dto.OrderDetails;
 import com.seethayya.shoppingcart.service.CustomerOrderService;
 import com.seethayya.shoppingcart.service.ItemService;
 import com.seethayya.shoppingcart.util.RandomUtils;
@@ -14,6 +16,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +30,7 @@ public class CustomerAction extends BaseAction {
 
     private String userName;
     private Customer customer;
-    private List<Item> itemList;
-    private List<OrderDetailForm> orderDetailForms;
-    private List<OrderForm> orderForms;
-    private String orderId;
     private CustomerService customerService;
-    private CustomerOrderService customerOrderService;
-    private ItemService itemService;
 
     private static final Logger LOGGER = Logger.getLogger(CustomerAction.class);
 
@@ -55,7 +52,7 @@ public class CustomerAction extends BaseAction {
         }
         Map session = ActionContext.getContext().getSession();
         session.put("customer", customerDto);
-        loadOrders();
+        //loadOrders();
         return SUCCESS;
     }
 
@@ -76,8 +73,10 @@ public class CustomerAction extends BaseAction {
         if (validateCustomer()) {
             return ERROR;
         }
-        customerService.saveOrUpdateCustomer(customer);
-        loadOrders();
+        com.seethayya.shoppingcart.dto.Customer customerDto  =customerService.saveOrUpdateCustomer(customer);
+        Map session = ActionContext.getContext().getSession();
+        session.put("customer", customerDto);
+        //loadOrders();
         addActionMessage("Registration done successfully.");
         return SUCCESS;
     }
@@ -103,46 +102,8 @@ public class CustomerAction extends BaseAction {
         return hasErrors();
     }
 
-    public String orderDetails() {
-        return SUCCESS;
-    }
-
-    public String newOrder() {
-        boolean isOrderIdNotExist = false;
-        do {
-            orderId = RandomUtils.generateRandomOrderId();
-            isOrderIdNotExist = customerOrderService.findOrdersByOrderId(orderId).isEmpty();
-        } while (!isOrderIdNotExist);
-        itemList = itemService.loadAllItems();
-        return SUCCESS;
-    }
-
-    public String loadOrders() {
-        com.seethayya.shoppingcart.dto.Customer sessionCustomer = getCustomerFromSession();
-        if (sessionCustomer == null) {
-        }
-        orderForms = customerOrderService.findCustomerOrders(sessionCustomer.getId());
-        return SUCCESS;
-    }
-
     public String signOut() {
         getSessionMap().remove("customer");
-        return SUCCESS;
-    }
-
-
-   private com.seethayya.shoppingcart.dto.Customer getCustomerFromSession() {
-        return (com.seethayya.shoppingcart.dto.Customer) getSessionMap().get("customer");
-   }
-
-    public String createOrder() {
-         com.seethayya.shoppingcart.dto.Customer sessionCustomer = getCustomerFromSession();
-        if (sessionCustomer == null) {
-        }
-        LOGGER.debug("---OrderId:" + orderId);
-        LOGGER.debug("---Order list:" + orderDetailForms);
-        customerOrderService.createOrder(orderId, orderDetailForms, sessionCustomer.getId());
-        loadOrders();
         return SUCCESS;
     }
 
@@ -174,50 +135,8 @@ public class CustomerAction extends BaseAction {
         this.customer = customer;
     }
 
-    public List<Item> getItemList() {
-        return itemList;
-    }
-
-    public void setItemList(List<Item> itemList) {
-        this.itemList = itemList;
-    }
-
-    public List<OrderDetailForm> getOrderDetailForms() {
-        return orderDetailForms;
-    }
-
-    public void setOrderDetailForms(List<OrderDetailForm> orderDetailForms) {
-        this.orderDetailForms = orderDetailForms;
-    }
-
-    public String getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(String orderId) {
-        this.orderId = orderId;
-    }
-
-    public List<OrderForm> getOrderForms() {
-        return orderForms;
-    }
-
-    public void setOrderForms(List<OrderForm> orderForms) {
-        this.orderForms = orderForms;
-    }
-
     @Resource
     public void setCustomerService(CustomerService customerService) {
         this.customerService = customerService;
-    }
-
-    @Resource
-    public void setItemService(ItemService itemService) {
-        this.itemService = itemService;
-    }
-
-    @Resource
-    public void setCustomerOrderService(CustomerOrderService customerOrderService) {
-        this.customerOrderService = customerOrderService;
     }
 }

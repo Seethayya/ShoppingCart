@@ -2,6 +2,7 @@ package com.seethayya.shoppingcart.webapp.form;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,9 +12,20 @@ import java.util.Date;
  */
 public class OrderForm {
 
+
+    private Long id;
     private String orderId;
     private BigDecimal totalPrice;
     private Date orderDate;
+    private List<OrderDetailForm> orderDetailForms;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getOrderId() {
         return orderId;
@@ -37,5 +49,13 @@ public class OrderForm {
 
     public void setOrderDate(Date orderDate) {
         this.orderDate = orderDate;
+    }
+
+    public List<OrderDetailForm> getOrderDetailForms() {
+        return orderDetailForms;
+    }
+
+    public void setOrderDetailForms(List<OrderDetailForm> orderDetailForms) {
+        this.orderDetailForms = orderDetailForms;
     }
 }

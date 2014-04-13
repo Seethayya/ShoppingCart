@@ -2,7 +2,7 @@ package com.seethayya.shoppingcart.webapp.form;
 
 /**
  * Created by IntelliJ IDEA.
- * User: Manjunatha
+ * User: Seethayya
  * Date: 4/9/14
  * Time: 1:42 PM
  */
