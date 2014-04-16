@@ -5,6 +5,13 @@
     <persistence-unit name="shoppingCartPersistence" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <!-- the JNDI data source -->
+		<!-- Tomcat configuration of Datasoource
+			<Resource name="jdbc/shoppingCart" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="root" password="root" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/ShoppingCart"/>
+		
+		-->
         <non-jta-data-source>jdbc/shoppingCart</non-jta-data-source>
         <class>com.seethayya.shoppingcart.dto.Customer</class>
         <class>com.seethayya.shoppingcart.dto.CustomerOrder</class>
