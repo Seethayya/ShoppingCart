@@ -7,7 +7,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <html>
-<head><title>Simple jsp page</title></head>
+<head><title>Simple jsp page</title>
+    <link rel="stylesheet" href="css/jquery-ui-1.10.4.css" type="text/css">
+    <script type="text/javascript" src="js/jQuery-1.11.0.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.js"></script>
+    <script type="text/javascript" src="js/jQuery-autocompletor.js"></script>
+    <script type="text/javascript">
+    </script>
+</head>
 <body>
 <div style="width:960px;">
  Please enter following details : <br/>
@@ -18,7 +25,9 @@
     last Name : <s:textfield name="customer.lastName"/>          <br/>
     Phone no : <s:textfield name="customer.phoneNo"/>                 <br/>
     Email Id : <s:textfield name="customer.emailId"/>                      <br/>
-    Password : <s:password name="customer.password"/>                           <br/>
+    Password : <s:password name="customer.password"/>
+    Country : <s:textfield name="customer.country" id="countryName"/>
+     <br/>
      <s:submit value="register"/>
      <br/>
      <div style="color:red;">
