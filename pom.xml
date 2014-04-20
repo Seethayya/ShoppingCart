@@ -44,6 +44,12 @@
             <artifactId>struts2-core</artifactId>
             <version>${struts-version}</version>
         </dependency>
+           <!-- Struts 2 JSON Plugins -->
+    <dependency>
+          <groupId>org.apache.struts</groupId>
+	  <artifactId>struts2-json-plugin</artifactId>
+	  <version>${struts-version}</version>
+    </dependency>
 
         <!-- Spring framework -->
         <dependency>

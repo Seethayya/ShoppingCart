@@ -88,4 +88,11 @@
         </action>
     </package>
 
+     <package name="default" namespace="/" extends="json-default">
+      <action name="getCountry"
+           class="com.seethayya.shoppingcart.webapp.action.CountryAutocompleteAction">
+       	   <result type="json"  name="success">countryList</result>
+      </action>
+    </package>
+
 </struts>

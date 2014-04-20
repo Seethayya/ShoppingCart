@@ -55,4 +55,12 @@
             </bean>
         </property>
     </bean>
+    <bean id="countryDao" parent="abstractDao">
+        <property name="proxyInterfaces" value="com.seethayya.shoppingcart.dao.CountryDao"/>
+        <property name="target">
+            <bean parent="abstractDaoTarget">
+                <constructor-arg value="com.seethayya.shoppingcart.dto.Country"/>
+            </bean>
+        </property>
+    </bean>
 </beans>

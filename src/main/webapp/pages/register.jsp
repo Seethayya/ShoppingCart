@@ -14,6 +14,10 @@
     <script type="text/javascript" src="js/jQuery-autocompletor.js"></script>
     <script type="text/javascript">
     </script>
+    <style type="text/css">
+        .ui-menu-item {
+    font-size: 11px;}
+    </style>
 </head>
 <body>
 <div style="width:960px;">
