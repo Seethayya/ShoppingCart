@@ -58,8 +58,8 @@
             <result name="error" type="tiles">/orderDetails.tiles</result>
         </action>
         <action name="createOrder" class="com.seethayya.shoppingcart.webapp.action.CustomerOrderAction" method="createOrder">
-            <result name="success" type="tiles">/customerOrders.tiles</result>
-            <result name="error" type="tiles">/orderDetails.tiles</result>
+            <result name="success">pages/orderFormDetails.jsp</result>
+            <result name="error" type="tiles">pages/orderFormDetails.jsp</result>
         </action>
 
         <action name="findCustomerOrders" class="com.seethayya.shoppingcart.webapp.action.CustomerOrderAction" method="loadOrders">
