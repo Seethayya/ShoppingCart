@@ -64,7 +64,8 @@ public class CustomerOrderAction extends BaseAction {
         LOGGER.debug("---OrderId:" + orderId);
         LOGGER.debug("---Order list:" + orderDetailForms);
         customerOrderService.createOrUpdateOrder(orderId, orderDetailForms, sessionCustomer.getId());
-        loadOrders();
+        addActionMessage("Order created successfully");
+        itemList = itemService.loadAllItems();
         return SUCCESS;
     }
 
