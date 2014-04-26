@@ -1,0 +1,9 @@
+Hi, <br/>
+
+U registered Success fully<br/>
+UserName : ${customer.userName} <br/>
+Password : ${customer.password}
+
+
+
+

@@ -1,6 +1,8 @@
 package com.seethayya.shoppingcart.service.impl;
 
 import com.seethayya.shoppingcart.dao.CustomerDao;
+import com.seethayya.shoppingcart.enums.TemplateNames;
+import com.seethayya.shoppingcart.mail.MailService;
 import com.seethayya.shoppingcart.webapp.form.Customer;
 import com.seethayya.shoppingcart.service.CustomerService;
 import org.springframework.beans.BeanUtils;
@@ -21,6 +23,7 @@ import java.util.List;
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDao customerDao;
+    private MailService mailService;
 
     public com.seethayya.shoppingcart.dto.Customer findCustomerById(Long id) {
         return customerDao.read(id);
@@ -39,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (customer.getId() == null) {
             customerDao.create(customerDto);
             customer.setId(customerDto.getId());
+            mailService.sendMail(customerDto.getEmailId(), null, TemplateNames.templates.getPath()+TemplateNames.registrationMail.name(), customerDto);
         } else {
             customerDao.update(customerDto);
         }
@@ -96,5 +100,10 @@ public class CustomerServiceImpl implements CustomerService {
     @Resource
     public void setCustomerDao(CustomerDao customerDao) {
         this.customerDao = customerDao;
+    }
+
+    @Resource
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
     }
 }
