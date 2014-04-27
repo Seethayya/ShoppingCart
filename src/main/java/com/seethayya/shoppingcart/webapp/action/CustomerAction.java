@@ -35,8 +35,15 @@ public class CustomerAction extends BaseAction {
 
     private static final Logger LOGGER = Logger.getLogger(CustomerAction.class);
 
+
     public String execute() {
-        LOGGER.debug("Started Action HOME");
+
+        String s= null;
+        try {
+        s.length();
+        } catch (Exception e) {
+        LOGGER.error("Started Action HOME", e);
+        }
         if(getCustomerFromSession() != null) {
             return ALREADY_SIGN_IN;
         }
