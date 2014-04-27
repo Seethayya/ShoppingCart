@@ -1,0 +1,9 @@
+Hi ${customer.firstName} ${customer.lastName}, <br/>
+
+You have been registered Successfully in shopping cart. Your login details are <br/>
+UserName : ${customer.emailId} <br/>
+Password : ${customer.password}
+
+
+
+

@@ -15,4 +15,6 @@
     </bean>
     <import resource="spring-dao.xml"/>
     <import resource="spring-jpa.xml"/>
+    <import resource="spring-velocity.xml"/>
+    <import resource="spring-mail.xml"/>
 </beans>
