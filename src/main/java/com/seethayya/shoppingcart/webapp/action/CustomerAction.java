@@ -39,11 +39,6 @@ public class CustomerAction extends BaseAction {
     public String execute() {
 
         String s= null;
-        try {
-        s.length();
-        } catch (Exception e) {
-        LOGGER.error("Started Action HOME", e);
-        }
         if(getCustomerFromSession() != null) {
             return ALREADY_SIGN_IN;
         }
