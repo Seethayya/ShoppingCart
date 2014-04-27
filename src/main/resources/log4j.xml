@@ -27,13 +27,13 @@
 
     <appender name="mail" class="com.seethayya.shoppingcart.util.DynamicSubjectAppender">
         <param name="BufferSize" value="512"/>
-        <param name="SMTPHost" value="smtp.gmail.com"/>
-        <param name="SMTPPort" value="465"/>
-        <param name="SMTPProtocol" value="smtps"/>
+        <param name="SMTPHost" value="${smtp.host}"/>
+        <param name="SMTPPort" value="${smtp.port}"/>
+        <param name="SMTPProtocol" value="${smtp.protocol}"/>
         <param name="SMTPUsername" value="${userName}"/>
         <param name="SMTPPassword" value="${password}"/>
-        <param name="From" value="no-reply@shoppingcart.com"/>
-        <param name="To" value="nsitayya@gmail.com"/>
+        <param name="From" value="${userName}"/>
+        <param name="To" value="${to.mail.address}"/>
         <param name="Subject" value="Error occured in #CLASS in method #METHOD at line no #LINENO on due to"/>
         <layout class="org.apache.log4j.HTMLLayout">
             <param name="ConversionPattern" value="%d [%t] %-5p %c %x – %m%n"/>
