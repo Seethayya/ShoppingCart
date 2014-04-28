@@ -55,6 +55,10 @@ public class CustomerAction extends BaseAction {
             return ERROR;
         }
         com.seethayya.shoppingcart.dto.Customer customerDto = customerService.findCustomerByEmailId(customer.getEmailId());
+        if(null == customerDto) {
+            addActionError("UserName does not exist");
+            return ERROR;
+        }
         if (!customer.getPassword().equals(customerDto.getPassword())) {
             addActionError("Username and Pass word is in correct");
             return ERROR;
