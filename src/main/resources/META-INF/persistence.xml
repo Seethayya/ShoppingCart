@@ -24,6 +24,9 @@
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>
+            <!-- Hibernate inverse for auditing -->
+            <property name="org.hibernate.envers.audit_table_prefix" value="aud_"/>
+            <property name="org.hibernate.envers.audit_table_suffix" value=""/>
         </properties>
     </persistence-unit>
 </persistence>

@@ -42,7 +42,6 @@ public class CustomerAction extends BaseAction {
         if(getCustomerFromSession() != null) {
             return ALREADY_SIGN_IN;
         }
-        customerService.findCustomer(userName);
         return SUCCESS;
     }
 
