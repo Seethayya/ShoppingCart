@@ -1,6 +1,7 @@
 package com.seethayya.shoppingcart.dto;
 
 import com.seethayya.shoppingcart.enums.OrderType;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
@@ -22,6 +23,8 @@ import java.util.Set;
 @NamedQueries(
         {@NamedQuery(name="CustomerOrder.findOrderByOrderId", query = "from CustomerOrder order where order.orderId = ?")}
 )
+@Cacheable
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 public class CustomerOrder extends BaseDto {
 
     private OrderType orderType;

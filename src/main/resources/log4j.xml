@@ -50,6 +50,11 @@
         <appender-ref ref="shoppingCart"/>
         <appender-ref ref="mail"/>
     </logger>
+    <logger name="org.hibernate.SQL">
+        <level value="debug"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="shoppingCart"/>
+    </logger>
 
     <root>
         <priority value="error"/>

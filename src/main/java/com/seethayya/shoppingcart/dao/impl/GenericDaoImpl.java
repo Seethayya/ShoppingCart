@@ -53,6 +53,7 @@ public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T,
         final String queryName = queryNameFromMethod(method);
         final javax.persistence.Query namedQuery = this.entityManager.createNamedQuery(queryName);
         Set<Parameter<?>> namedParameters = namedQuery.getParameters();
+        namedQuery.setHint("org.hibernate.cacheable", true);
         boolean isSingleNamedQuery = true;
         for (Parameter parameter: namedParameters) {
             if (parameter.getPosition() != null) {

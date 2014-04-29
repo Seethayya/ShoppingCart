@@ -16,6 +16,7 @@
         <class>com.seethayya.shoppingcart.dto.Customer</class>
         <class>com.seethayya.shoppingcart.dto.CustomerOrder</class>
         <class>com.seethayya.shoppingcart.dto.OrderDetails</class>
+        <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
             <!--<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/shoppingcart"/>
@@ -27,6 +28,16 @@
             <!-- Hibernate inverse for auditing -->
             <property name="org.hibernate.envers.audit_table_prefix" value="aud_"/>
             <property name="org.hibernate.envers.audit_table_suffix" value=""/>
+            <!-- HIbernate Secondary level cache confoguration with memcache -->
+            <!-- http://www.javawebdevelop.com/2982675/
+                    For installing memcache http://www.facebook.com/l.php?u=http%3A%2F%2Fwww.codeforest.net%2Fhow-to-install-memcached-on-windows-machine&h=EAQG_B1HH-->
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
+            <property name="hibernate.cache.use_query_cache" value="true"/>
+            <!--<property name = "hibernate.cache.provider_class" value = "com.googlecode.hibernate.memcached.MemcachedCacheProvider" />-->
+            <property name="hibernate.cache.region.factory_class" value="com.googlecode.hibernate.memcached.MemcachedRegionFactory"/>
+            <!--<property name="hibernate.Memcached.connectionFactory" value="net.spy.memcached.BinaryConnectionFactory"/>-->
+            <property name = "hibernate.memcached.servers" value = "${memcache.url}"/>
+            <property name = "hibernate.memcached.cacheTimeSeconds" value = "${memcache.timeout.seconds}" />
         </properties>
     </persistence-unit>
 </persistence>
