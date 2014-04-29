@@ -18,20 +18,22 @@
         <struts2-tiles-plugin-version>2.3.16</struts2-tiles-plugin-version>
         <!--<spring-version>3.2.0.RELEASE</spring-version>-->
         <velocity-version>1.7</velocity-version>
+        <hibernate-version>4.3.5.Final</hibernate-version>
     </properties>
     <build>
         <filters>
             <filter>src/main/resources/mail.properties</filter>
+            <filter>src/main/resources/memcache.properties</filter>
         </filters>
         <defaultGoal>package</defaultGoal>
         <finalName>shoppingCart</finalName>
         <resources>
-			<resource>
-				<directory>src/main/resources</directory>
+            <resource>
+                <directory>src/main/resources</directory>
                 <filtering>true</filtering>
-			</resource>
+            </resource>
 
-		</resources>
+        </resources>
         <plugins>
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -49,6 +51,13 @@
             </plugin>
         </plugins>
     </build>
+    <!--<repositories>
+        <repository>
+            <id>hibernate-memcached</id>
+            <name>hibernate-memcached</name>
+            <url>http://raykrueger.googlecode.com/svn/repository</url>
+        </repository>
+    </repositories>-->
     <dependencies>
         <!-- Struts 2 -->
         <dependency>
@@ -56,12 +65,12 @@
             <artifactId>struts2-core</artifactId>
             <version>${struts-version}</version>
         </dependency>
-           <!-- Struts 2 JSON Plugins -->
-    <dependency>
-          <groupId>org.apache.struts</groupId>
-	  <artifactId>struts2-json-plugin</artifactId>
-	  <version>${struts-version}</version>
-    </dependency>
+        <!-- Struts 2 JSON Plugins -->
+        <dependency>
+            <groupId>org.apache.struts</groupId>
+            <artifactId>struts2-json-plugin</artifactId>
+            <version>${struts-version}</version>
+        </dependency>
 
         <!-- Spring framework -->
         <dependency>
@@ -106,13 +115,13 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <artifactId>hibernate-jpa-2.1-api</artifactId>
+            <version>1.0.0.Final</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.0.1.Final</version>
+            <version>${hibernate-version}</version>
         </dependency>
         <!-- Tiles dependency -->
         <dependency>
@@ -145,7 +154,7 @@
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
-             <exclusions>
+            <exclusions>
                 <exclusion>
                     <groupId>javax.mail</groupId>
                     <artifactId>mail</artifactId>
@@ -200,6 +209,32 @@
 	                <artifactId>junit</artifactId>
                 </exclusion>
             </exclusions>-->
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-envers</artifactId>
+            <version>${hibernate-version}</version>
+        </dependency>
+        <!-- Memcache for Hibernate 2nd level Cache
+            This Jar is not available in any central repository to download directly, we need to install manually in your local repo
+            To download:http://gwtrepo.googlecode.com/svn/repo/com/googlecode/hibernate-memcached/1.5-SNAPSHOT/
+            To install in local repo use : mvn install:install-file -Dfile=<Path>\hibernate-memcached-1.5.jar -DpomFile=<Path>\hibernate-memcached-1.5-SNAPSHOT.pom
+            The pom file is available in jar extract it and use path
+        -->
+        <dependency>
+            <groupId>com.googlecode</groupId>
+            <artifactId>hibernate-memcached</artifactId>
+            <version>1.5-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-annotations</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

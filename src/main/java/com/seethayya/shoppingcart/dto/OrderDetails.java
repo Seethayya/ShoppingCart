@@ -1,5 +1,7 @@
 package com.seethayya.shoppingcart.dto;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,6 +14,8 @@ import java.io.Serializable;
 @Entity
 @org.hibernate.annotations.Entity(dynamicInsert = true, dynamicUpdate = true)
 @Table(name = "order_details")
+@Cacheable
+@org.hibernate.annotations.Cache(usage= CacheConcurrencyStrategy.READ_WRITE)
 public class OrderDetails extends BaseDto {
 
     private Long quantity;

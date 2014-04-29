@@ -1,5 +1,9 @@
 package com.seethayya.shoppingcart.dto;
 
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
@@ -18,6 +22,9 @@ import java.util.Set;
         {@NamedQuery(name="Customer.findCustomerByEmail", query = "from Customer customer where customer.emailId = ?"),
         @NamedQuery(name="Customer.findCustomerByMobileNo", query = "from Customer customer where customer.mobileNo = ?")}
 )
+@Audited
+@Cacheable
+@org.hibernate.annotations.Cache(usage=CacheConcurrencyStrategy.READ_WRITE)
 public class Customer extends BaseDto {
 
     private String firstName;
@@ -83,6 +90,7 @@ public class Customer extends BaseDto {
         this.mobileNo = mobileNo;
     }
 
+    @NotAudited
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "customer")
     public Set<CustomerOrder> getCustomerOrders() {
         return customerOrders;

@@ -1,6 +1,7 @@
 package com.seethayya.shoppingcart.dao;
 
 import com.mysql.jdbc.Driver;
+import com.seethayya.shoppingcart.dto.Customer;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.jdbc.datasource.SingleConnectionDataSource;
 import org.springframework.mock.jndi.SimpleNamingContextBuilder;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Propagation;
@@ -31,6 +33,16 @@ public class CustomerDaoTest extends DataSourceConfigTest {
     @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)
     public void testCustomer() {
         System.out.println(customerDao.read(1l));
+    }
+
+    @Test
+    @Transactional(value = "shoppingCartTransactionManager", propagation = Propagation.REQUIRED)
+    @Rollback(false)
+    public void testAuditCustomer() {
+        Customer customer = customerDao.read(1l);
+        customer.setMiddleName("Test Audit");
+        customerDao.update(customer);
+        //System.out.println(customerDao.read(1l));
     }
 
     @Resource
