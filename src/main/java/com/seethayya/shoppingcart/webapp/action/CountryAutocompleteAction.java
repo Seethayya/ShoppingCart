@@ -23,8 +23,10 @@ public class CountryAutocompleteAction extends BaseAction {
     private List<String> countryList;
     private String country;
     private CountryService countryService;
+    private static final Logger LOGGER = Logger.getLogger(CountryAutocompleteAction.class);
 
     public String execute() {
+        LOGGER.debug("-----CountryAutocompleteAction:"+country);
         countryList = new ArrayList<String>();
         for (Country countryDto : countryService.findAllCountries()) {
             if (countryDto.getName().contains(country)) {

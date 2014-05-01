@@ -4,6 +4,7 @@ import com.seethayya.shoppingcart.dao.CountryDao;
 import com.seethayya.shoppingcart.dto.Country;
 import com.seethayya.shoppingcart.service.CountryService;
 import org.apache.log4j.Logger;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -32,7 +33,9 @@ public class CountryServiceImpl implements CountryService{
     }
 
     @Override
+    @Cacheable(value = "defaultCache", key = "'countryList'")
     public List<Country> findAllCountries() {
+        LOGGER.debug("------------------Find All Countries inside method");
         return countryList;
     }
 
