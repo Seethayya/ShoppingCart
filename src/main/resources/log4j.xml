@@ -55,6 +55,16 @@
         <appender-ref ref="console"/>
         <appender-ref ref="shoppingCart"/>
     </logger>
+    <logger name="org.springframework">
+        <level value="error"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="shoppingCart"/>
+    </logger>
+    <logger name="com.google.code">
+        <level value="debug"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="shoppingCart"/>
+    </logger>
 
     <root>
         <priority value="error"/>

@@ -17,4 +17,5 @@
     <import resource="spring-jpa.xml"/>
     <import resource="spring-velocity.xml"/>
     <import resource="spring-mail.xml"/>
+    <import resource="spring-cache.xml"/>
 </beans>
