@@ -19,7 +19,7 @@ import java.util.List;
  * Date: 4/9/14
  * Time: 1:41 PM
  */
-@Service
+@Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
 
     private CustomerDao customerDao;
