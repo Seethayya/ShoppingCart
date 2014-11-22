@@ -20,10 +20,20 @@
 
     <bean id="shoppingCartEntityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-        <property name="persistenceUnitName" value="shoppingCartPersistence"/>
+        <property name="persistenceUnitName" value="shoppingCartPersistence" />
+        <!-- TODO::Need to enable this you want to run the program from Main method -->
+        <!--<property name="dataSource" ref="shoppingCartDataSource"/>-->
         <!-- even this property is not configured generic dao is working fine -->
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/>
         </property>
+    </bean>
+
+    <!-- Need to use this you want to run the program from Main method -->
+    <bean id="shoppingCartDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <property name="url" value="jdbc:mysql://localhost:3306/shoppingCart" />
+        <property name="username" value="root" />
+        <property name="password" value="pratap" />
     </bean>
 </beans>
