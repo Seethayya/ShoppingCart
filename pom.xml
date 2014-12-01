@@ -278,5 +278,14 @@
             </exclusions>
         </dependency>
 
+        <!-- START Liquibase dependency-->
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.3.0</version>
+        </dependency>
+        <!-- END Liquibase dependency-->
+
+
     </dependencies>
 </project>
