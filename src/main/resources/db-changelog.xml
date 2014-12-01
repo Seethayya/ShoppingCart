@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="1" author="seethayya">
+        <preConditions onFail="CONTINUE">
+            <sqlCheck expectedResult="1">select count(*) from CUSTOMER where ID=1</sqlCheck>
+        </preConditions>
+        <comment>Comments should go after preCondition. If they are before then liquibase usually gives error.</comment>
+        <sql>
+            UPDATE CUSTOMER SET MIDDLENAME='MIDDLE_LIQUIBASE' WHERE ID =1;
+        </sql>
+    </changeSet>
+</databaseChangeLog>
